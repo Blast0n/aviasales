@@ -16,9 +16,11 @@
     "antd": "^5.13.2",
     "date-fns": "^3.1.0",
     "lodash": "^4.17.21",
+    "normalize-scss": "^8.0.0",
     "react": "^18.2.0",
     "react-detect-offline": "^2.4.5",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass": "^1.70.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",

@@ -1,12 +1,18 @@
-import './App.css';
+import './App.module.scss';
+import Header from './components/Header/Header';
+import AsideBar from './components/AsideBar/AsideBar';
+import Filter from './components/Filter/Filter';
+import TicketList from './components/TicketsList/TicketsList';
+import Ticket from './components/Ticket/Ticket';
 
 function App() {
   return (
     <>
-      <h1>HELLO</h1>
-
-      <h2>world</h2>
-      <h3>!!!</h3>
+      <Header />
+      <AsideBar />
+      <Filter />
+      <Ticket />
+      <TicketList />
     </>
   );
 }
