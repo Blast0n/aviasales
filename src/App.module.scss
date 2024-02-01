@@ -1,4 +1,8 @@
-@import "node_modules/normalize-scss/sass/normalize";
-@include normalize();
-
-
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  @media (max-width:768px) {
+    flex-direction: column;
+  }
+}
