@@ -1,41 +1,49 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { onButtonClick } from '../../store/AppSlice';
+import { onBtnClick, filteredByClick } from '../../store/AppSlice';
 
 import style from './Filter.module.scss';
 
 export default function Filter() {
-  const filter = useSelector((state) => state.app.buttonsClicked);
   const dispatch = useDispatch();
+  const clickedBtn = useSelector((state) => state.app.clickedBtn);
 
-  const handleClick = (e) => {
+  const onClick = (e) => {
     const clickedId = e.target.id;
-    dispatch(onButtonClick(clickedId));
+    if (clickedBtn !== clickedId) {
+      dispatch(onBtnClick(clickedId));
+      dispatch(filteredByClick(clickedId));
+    }
   };
-
   return (
     <div className={style.filter}>
       <button
-        className={filter[1] ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`}
+        className={
+          clickedBtn === '1' ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`
+        }
         id="1"
         type="button"
-        onClick={(e) => handleClick(e)}
+        onClick={(e) => onClick(e)}
       >
         Самый дешевый
       </button>
       <button
-        className={filter[2] ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`}
+        className={
+          clickedBtn === '2' ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`
+        }
         id="2"
         type="button"
-        onClick={(e) => handleClick(e)}
+        onClick={(e) => onClick(e)}
       >
         Самый быстрый
       </button>
       <button
-        className={filter[3] ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`}
+        className={
+          clickedBtn === '3' ? `${style.filter__item} ${style['filter__item--active']}` : `${style.filter__item}`
+        }
         id="3"
         type="button"
-        onClick={(e) => handleClick(e)}
+        onClick={(e) => onClick(e)}
       >
         Оптимальный
       </button>
