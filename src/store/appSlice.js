@@ -66,13 +66,11 @@ const appSlice = createSlice({
         );
       }
       if (action.payload === '3') {
-        const avgPrice = state.data.reduce((sum, el) => sum + el.price, 0) / state.data.length;
-        const avgDuration =
-          state.data.reduce((sum, el) => sum + el.segments[0].duration + el.segments[1].duration, 0) /
-          state.data.length;
+        const minPrice = Math.min(...state.data.map((el) => el.price));
+        const minDuration = Math.min(...state.data.map((el) => el.segments[0].duration + el.segments[1].duration));
         const totalDifference = (obj) => {
           const totalDuration = obj.segments[0].duration + obj.segments[1].duration;
-          return Math.abs(obj.price - avgPrice) + Math.abs(totalDuration - avgDuration);
+          return Math.abs(obj.price - minPrice) + Math.abs(totalDuration - minDuration);
         };
         state.data = state.data.sort((a, b) => totalDifference(a) - totalDifference(b));
       }
