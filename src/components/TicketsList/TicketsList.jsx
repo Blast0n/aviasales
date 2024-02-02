@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import { Spin } from 'antd';
 
@@ -10,31 +10,32 @@ import style from './TicketsList.module.scss';
 export default function TicketList() {
   const [value, setValue] = useState(5);
   const { data, loading, checkedList } = useSelector((state) => state.app);
+  const [tickets, setTickets] = useState([]);
+  useEffect(() => {
+    const filterObj = {
+      'Без пересадок': 0,
+      '1 пересадка': 1,
+      '2 пересадки': 2,
+      '3 пересадки': 3,
+    };
+    const filterArr = checkedList.map((el) => filterObj[el]);
+    if (data) {
+      const filteredFlights = data.filter((el) => {
+        const testArr = [el.segments[0].stops.length, el.segments[1].stops.length];
+        return testArr.every((num) => filterArr.includes(num));
+      });
+      const arrTickets = filteredFlights.map((el) => {
+        return (
+          <Ticket key={uuid()} price={el.price} carrier={el.carrier} first={el.segments[0]} second={el.segments[1]} />
+        );
+      });
+      setTickets(arrTickets);
+    }
+  }, [data, checkedList]);
+
   const onClick = () => {
     setValue((prev) => prev + 5);
   };
-  let tickets = null;
-
-  const filterObj = {
-    'Без пересадок': 0,
-    '1 пересадка': 1,
-    '2 пересадки': 2,
-    '3 пересадки': 3,
-  };
-
-  const filterArr = checkedList.map((el) => filterObj[el]);
-
-  if (data) {
-    const filteredFlights = data.filter((el) => {
-      const testArr = [el.segments[0].stops.length, el.segments[1].stops.length];
-      return testArr.every((num) => filterArr.includes(num));
-    });
-    tickets = filteredFlights.map((el) => {
-      return (
-        <Ticket key={uuid()} price={el.price} carrier={el.carrier} first={el.segments[0]} second={el.segments[1]} />
-      );
-    });
-  }
 
   return (
     <ul className={style['ticket-list']}>
