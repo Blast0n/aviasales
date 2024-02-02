@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { onBtnClick, filteredByClick } from '../../store/AppSlice';
+import { onBtnClick, filteredByClick } from '../../store/appSlice';
 
 import style from './Filter.module.scss';
 

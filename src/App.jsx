@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchSeacrhId, fetchTickets } from './store/AppSlice';
+import { fetchSeacrhId, fetchTickets } from './store/appSlice';
 import style from './App.module.scss';
 import Header from './components/Header/Header';
 import AsideBar from './components/AsideBar/AsideBar';

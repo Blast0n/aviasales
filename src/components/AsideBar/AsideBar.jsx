@@ -2,7 +2,7 @@ import { Checkbox } from 'antd';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch, useSelector } from 'react-redux';
 
-import { onChange } from '../../store/AppSlice';
+import { onChange } from '../../store/appSlice';
 
 import style from './AsideBar.module.scss';
 
