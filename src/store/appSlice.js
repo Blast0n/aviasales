@@ -70,7 +70,7 @@ const appSlice = createSlice({
         const minDuration = Math.min(...state.data.map((el) => el.segments[0].duration + el.segments[1].duration));
         const totalDifference = (obj) => {
           const totalDuration = obj.segments[0].duration + obj.segments[1].duration;
-          return Math.abs(obj.price - minPrice) + Math.abs(totalDuration - minDuration);
+          return Math.abs(obj.price - minPrice) / 10 + Math.abs(totalDuration - minDuration);
         };
         state.data = state.data.sort((a, b) => totalDifference(a) - totalDifference(b));
       }
